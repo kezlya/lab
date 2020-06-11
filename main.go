@@ -13,13 +13,15 @@ func main() {
 	parseFlags()
 	models.ConnectElastic(*host)
 
-	if *action == "upload" {
+	if *action == "push" {
+		fmt.Println("pushing objects to", host)
 		models.InsertDocsFromFolder(*index, "upload", 100)
-	} else if *action == "download" {
+		fmt.Println("done")
+	} else if *action == "pull" {
+		fmt.Println("pulling objects from", host)
 		models.SaveDocsToFolder(*index, "download", 100)
+		fmt.Println("done")
 	}
-
-	fmt.Println("done")
 }
 
 func parseFlags() {
